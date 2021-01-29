@@ -112,8 +112,11 @@ class MockMeshApplication:
     """
 
     def __init__(self, shared_key):
+    # def __init__(self):
         self.messages = {}
+        # self._shared_key = bytearray('test', encoding="utf-8")
         self._shared_key = shared_key
+        print(type(self._shared_key).__name__ )
         self._msg_count = 0
 
     @property
@@ -418,7 +421,7 @@ class SSLWSGIServer(WSGIServer, object):
 def main():
     print("Serving on port 8000")
     server = make_server(
-        "", 8000, MockMeshApplication(), server_class=SSLWSGIServer)
+        "", 8000, MockMeshApplication(bytearray("BackBone", encoding="utf-8")), server_class=SSLWSGIServer)
     server.serve_forever(0.01)
 
 
